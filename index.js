@@ -57,5 +57,30 @@ function TextFile(filePath){
     this.SetPointer = SetPointer;
     this.GetPointer = GetPointer;
 }
-
 module.exports.TextFile = TextFile;
+module.exports.Directory = {
+    Exists: function(path){
+        var stat = require('fs').statSync(path);
+        return stat.isDirectory();
+    },
+    GetFiles: function(path, recursive = true){
+        const fs = require('fs');
+        function fileSearcher(dir, fileList){
+            fileList = fileList || [];
+            var files = fs.readdirSync(dir);
+            for(var i in files){
+                var name = dir + '/' + files[i];
+                if(fs.statSync(name).isDirectory()){
+                    if(recursive){
+                        fileSearcher(name, fileList);
+                    } else {
+                        fileList.push(name);
+                    }
+                }
+            }
+        }
+
+        return fileSearcher(path);
+    }
+}
+

@@ -1,6 +1,6 @@
 {
   "name": "lazy-io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Just a simple IO library for nodejs that I'm building for my own use (it's meat to work like System.IO from C#'s .net framework)",
   "main": "index.js",
   "scripts": {
